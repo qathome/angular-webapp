@@ -86,7 +86,7 @@ angular.module('qathome')
                 reloadOnSearch: false
             })
             .otherwise({
-                redirectTo: "/app/"
+                redirectTo: "/app/logged"
             });
 
         $locationProvider.html5Mode(true);
@@ -160,7 +160,7 @@ angular.module('qathome')
                     var newPath = '/app/firm/' + firmName + '/tickets/' + ticketId;
                     $rootScope.lastTicket = ticket;
                     $location.path(newPath);
-                    $window.ga('send', 'pageview', { page: $location.url() });
+                    // $window.ga('send', 'pageview', { page: $location.url() });
                     $cookies.put('ticket-'+firmName, ticketId, { path: '/' });
                 })
                 .error(function (data, status) {
@@ -191,7 +191,7 @@ angular.module('qathome')
             var firmName = $scope.firm.url_name;
             var newPath = '/app/firm/'+firmName+'/scegliorario';
             $location.path(newPath);
-            $window.ga('send', 'pageview', { page: $location.url() });
+            // $window.ga('send', 'pageview', { page: $location.url() });
         }
     })
     .controller('TicketCtrl', function($scope, $routeParams, $http, $interval, $timeout, $cookies, $sce) {
@@ -278,7 +278,7 @@ angular.module('qathome')
         $scope.apriSportello = function(desk) {
             var deskId = desk.id_for_firm;
             $location.path('/app/firms/'+firmId+'/desks/'+deskId);
-            $window.ga('send', 'pageview', { page: $location.url() });
+            // $window.ga('send', 'pageview', { page: $location.url() });
         };
 
         Identity.getMeAndFirm(firmId, function(me, firm) {
@@ -412,7 +412,7 @@ angular.module('qathome')
                         console.log(data, status);
                         // TODO: questo sicuramente e' sbagliato
                         $location.path('/firms/' + firmId);
-                        $window.ga('send', 'pageview', { page: $location.url() });
+                        // $window.ga('send', 'pageview', { page: $location.url() });
                     })
                     .error(defaultError)
             };

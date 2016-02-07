@@ -8,7 +8,6 @@ var QATHOME_CLIENT_CONFIG = {
         "scope": "read write groups",
         "token_type": "Bearer",
         "access_token": "BVYf1pHoJWOrDHSAzMPXnTcTNzw5uc",
-        "expires_in": 36000
     },
     firm_id: '37a5bfd9-db34-3a08-be51-5b67db1fcf47'
 };
