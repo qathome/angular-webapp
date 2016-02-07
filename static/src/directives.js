@@ -1,4 +1,21 @@
 angular.module('qathome')
+    .factory('HttpInjector', function() {
+        return {
+            request: function(config) {
+                if(config.url.indexOf('/api/') !== -1) {
+
+                    if(config.url.indexOf('http://') === -1) {
+                        // Aggiungiamo il server solo se non e' gia' stato aggiunto
+                        config.url = QATHOME_CLIENT_CONFIG.server + config.url;
+                    }
+
+                    var token = QATHOME_CLIENT_CONFIG.token;
+                    config.headers['Authorization'] = token.token_type + " " + token.access_token;
+                }
+                return config;
+            }
+        };
+    })
     .factory('Identity', function ($http, $rootScope, $cookies, $location) {
         return {
             isLogged: function isLogged() {
@@ -11,6 +28,9 @@ angular.module('qathome')
                     if(cb) cb($rootScope.me);
                 }
                 else {
+
+                    console.log("Logging in...");
+
                     $http.get('/api/v1/me/')
                         .success(function (data, status) {
                             $rootScope.me = data;

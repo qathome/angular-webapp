@@ -94,6 +94,9 @@ angular.module('qathome')
         // Diciamo di usare il cookie "csrftoken", Angular ne usa un altro di default
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+        //Setta il token in ogni richiesta fatta con $http
+        $httpProvider.interceptors.push('HttpInjector');
     })
     .controller('TranslationCtrl', function($scope, $translate) {
         $scope.changeLanguage = function (key) {
