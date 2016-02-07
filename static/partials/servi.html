@@ -1,0 +1,129 @@
+<barra></barra>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span style="font-size: 35px; font-weight: bold">{{desk.firm.name}}</span>
+                    <div style="color: #28a5a8;">Indirizzo pubblico per prendere i biglietti: <a href="/{{ desk.firm.url_name }}">http://{{ location }}/{{ desk.firm.url_name }}</a></div>
+                    <div>
+                        Stai servendo:
+                        <b>{{desk.name}} - {{desk.queue.name}} - Coda {{desk.queue.letter}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-push-4 col-xs-12">
+            <button ng-click="serviProssimo()" type="button"
+                    class="btn btn-primary btn-block"
+                    ng-disabled="loadingProssimo">
+                <span ng-show="!loadingProssimo" style="font-size: xx-large">Servi il prossimo</span>
+                <span ng-show="loadingProssimo" style="font-size: xx-large"
+                      class="glyphicon glyphicon-refresh spinner"></span>
+            </button>
+
+            <br>
+
+            <div class="servibiglietto">
+                <div style="text-align: center" class="alert alert-success"
+                     ng-if="!erroreAdessoServo && adessoServo != null && !codaVuota">
+                    <h2>Stai servendo:</h2>
+
+                    <h1 title="Email {{adessoServo.owner.email}}, Codice di controllo {{adessoServo.datetime_created}}">
+                        {{adessoServo.user_code}}
+                    </h1>
+                    <div>{{adessoServo.owner.first_name}} {{adessoServo.owner.last_name}}</div>
+                </div>
+                <div style="text-align: center" class="alert alert-danger" ng-if="erroreAdessoServo">
+                    <h1>Riprova</h1>
+                </div>
+                <div style="text-align: center" class="alert alert-warning" ng-if="!erroreAdessoServo && codaVuota">
+                    <h3>La coda e' vuota</h3>
+                    <br>
+
+                    <div title="Fa ripartire il conteggio dei numeri da 1">
+                        <button ng-click="resetcounter()" type="button"
+                            class="btn btn-warning btn-md aggiungi-coda"
+                            ng-disabled="loadingProssimo">
+                            <span ng-show="!loadingProssimo" style="font-size: medium">Azzera numeri</span>
+                        </button>
+                        <br><br>
+                        <div style="text-align: center" class="alert alert-success"
+                            ng-if="numeriAzzerati">
+                            Il contatore e' stato azzerato. Il prossimo in coda avra' il numero 1.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-md-pull-8 col-xs-12">
+            <!--<div class="panel panel-default">-->
+            <!--<div class="panel-body">-->
+            <!--<h4>Persone in coda: <b>{{ ticketsCount }}</b></h4>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="panel panel-default">
+                <div class="panel-heading">Prossimi in coda:</div>
+                <div class="panel-body">
+                    <!--<ul class="list-group">-->
+                    <!--<li class="list-group-item" ng-repeat="ticket in tickets">-->
+                    <!--{{ticket.user_code}} ({{ticket.owner.username}})-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<div class="list-group">-->
+                    <!--<div class="list-group-item" ng-repeat="ticket in tickets">-->
+                    <style>
+                        .ticket-label {
+                            padding:3px;
+                        }
+                        .ticket-label:hover {
+                            cursor:pointer;
+                            background-color: #e5e5e5;
+                        }
+                    </style>
+                    <div ng-repeat="ticket in tickets">
+                        <div class="ticket-label"
+                             ng-click="openTicketDialog(ticket)"
+                                title="Clicca per opzioni avanzate">
+                            {{ticket.user_code}}
+                            <span ng-if="ticket.owner.first_name || ticket.owner.last_name">- {{ticket.owner.first_name}} {{ticket.owner.last_name}}</span>
+
+                        </div>
+                        <!--<h4 class="list-group-item-heading">-->
+                        <!--</h4>-->
+                    </div>
+                    <div ng-if="altri >= 1">
+                        (altri {{altri}})
+                    </div>
+                    <span ng-show="tickets.length == 0">Nessun utente in coda</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <!-- PRENDI BIGLIETTO -->
+
+        <a href="#" ng-click="autoscrollMostra()">
+            <!--<span class="caret-right"></span>-->
+            <span ng-if="!mostraBottone" class="glyphicon glyphicon-triangle-right"></span>
+            <span ng-if="mostraBottone" class="glyphicon glyphicon-triangle-bottom"></span>
+            Aggiungi un utente in coda
+        </a>
+        <br><br>
+
+        <div ng-show="mostraBottone == true">
+
+            <emissione-biglietti params="emissioneParams"></emissione-biglietti>
+
+            <br><br>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,104 @@
+<barra></barra>
+
+<style>
+    .help .panel-heading {
+        font-size: large;
+        font-weight: bold;
+    }
+</style>
+<div class="container help">
+    <div class="col-md-12 col-lg-12">
+        <h2>Come usare QATHOME</h2>
+        <br/>
+    </div>
+    <div class="col-md-12 col-lg-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Come chiamare il prossimo
+            </div>
+            <div class="panel-body">
+                <span>Prima di chiamare un numero clicca su "Servi il Prossimo"</span><br/>
+                <img src="/static/assets/help/speaking_man.png">
+                <img src="/static/assets/help/servi_prossimo.png">
+            </div>
+        </div>
+        <br/>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Come aggiungere un utente in coda
+            </div>
+            <div class="panel-body">
+                Prima di dare un numero clicca su "Aggiungi un utente in coda"
+                <br/>
+                <img src="/static/assets/help/pen_on_postit.png">
+                <img src="/static/assets/help/aggiungi_utente.png">
+
+                <br/>
+
+                Se vuoi puoi scrivere il numero su questi
+
+                <a href="/static/assets/help/biglietti-pronti-alla-stampa-A4.pdf" target="_self">biglietti
+                    precompilati</a>
+                come promemoria per i tuoi utenti.
+            </div>
+        </div>
+        <br/>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Emissione biglietti on line
+            </div>
+            <div class="panel-body">
+                I tuoi utenti possono controllare gli ultimi numeri che hai chiamato e prendere un biglietto
+                online sulla tua pagina pubblica
+                <a href="/{{ firm.url_name }}">http://{{ location }}/{{firm.url_name }}</a><br/>
+                <img src="/static/assets/help/public_screen.png" width="500">
+                <img src="/static/assets/help/QATHOME_internet_ticket.jpg" width="180">
+            </div>
+        </div>
+        <br/>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Attivare/Disattivare emissione online
+            </div>
+            <div class="panel-body">
+                Puoi attivare/disattivare l'emissione dei biglietti online in ogni momento dal menù impostazioni.
+                <br>
+                <img src="/static/assets/help/on_off_button.png">   
+            </div>
+        </div>
+        <br/>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Ricorda il Poster!
+            </div>
+            <div class="panel-body">
+
+                Per tua comodità, ti raccomandiamo di stampare questo <a
+                    href="/static/assets/help/poster-pronto-alla-stampa-A3.pdf" target="_self">
+                poster</a> ed appenderlo 1) sulla porta di ingresso e 2) in sala d'attesa.
+            </div>
+        </div>
+
+
+        <div style="text-align: center; margin: 50px 0 80px 0">
+
+            <h3>Ok, ho capito!</h3>
+            <a href="/app/firms/{{currentFirm.url_id}}" class="btn btn-primary btn-lg">Vai agli sportelli</a>
+
+            <br><br><br/>
+
+            <h3>Hai altre domande?</h3>
+            <a href="/contact" class="btn btn-primary btn-lg" target="_self">Contattaci</a>
+        </div>
+
+
+    </div>
+
+</div>
+

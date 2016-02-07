@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default" style="min-height: 10px" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <div class="navbar-header">
+                <span class="navbar-brand" style="font-weight:bold; height: 20px; padding-top: 10px;">
+                    {{currentFirm.name}}
+                </span>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{ 'active': page === 'sportelli' }" class="nav-item">
+                    <a href="/app/firms/{{currentFirm.url_id}}">{{ 'DESKS' | translate }}</a></li>
+                <li ng-class="{ 'active': page === 'biglietti' }" class="nav-item">
+                    <a href="/app/firms/{{currentFirm.url_id}}/tickets">{{ 'TICKETS_EMISSION' | translate }}</a></li>
+                <li ng-class="{ 'active': page === 'pubblico' }" class="nav-item">
+                    <a href="/app/firm/{{currentFirm.url_name}}/public" target="_self">Schermo Pubblico</a></li>
+                <li ng-class="{ 'active': page === 'settings' }" class="nav-item">
+                    <a href="/app/firms/{{currentFirm.url_id}}/settings">Impostazioni</a></li>
+                <li ng-class="{ 'active': page === 'help' }" class="nav-item">
+                    <a href="/app/firms/{{currentFirm.url_id}}/help">Help</a></li>
+                <!--<li class="nav-item"><a href="/accounts/logout/" target="_self">Logout</a></li>-->
+            </ul>
+        </div>
+    </div>
+</nav>

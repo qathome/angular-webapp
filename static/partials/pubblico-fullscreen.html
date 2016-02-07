@@ -1,0 +1,55 @@
+<div ng-show="problemaConnessione" class="alert alert-danger col-lg-12 col-md-12" role="alert">
+    <!--<span class="glyphicon glyphicon-exclamation-sign"></span>-->
+    Problema di connessione. Attendere il ripristino della linea.
+</div>
+
+<div class="col-lg-8 col-md-8">
+    <div style="font-size: x-large; font-weight: bold">Ultimi numeri chiamati:</div>
+
+    <div class="panel panel-default">
+        <table class="table" border="4px">
+            <tr style="background-color: white; font-size:medium">
+                <th style="text-align: center">Biglietto</th>
+                <th style="text-align: center">Sportello</th>
+            </tr>
+            <tr ng-repeat="ticket in last" style="font-size:50px;">
+                <td style="color: blue; font-weight: bold; padding:3px; text-align: center">{{ticket.user_code}}</td>
+                <td style="color: green; font-weight: bold; padding:3px; text-align: center">{{ticket.desk.name}}</td>
+                <!--<td>{{ticket.time_service_started}}</td>-->
+            </tr>
+            <tr ng-if="last.length === 0">
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="col-lg-4 col-md-4">
+    <div style="font-size: x-large; font-weight: bold">Prossimi in coda:</div>
+
+    <div class="panel panel-default">
+        <table class="table" style="font-size: medium" border="4">
+            <tr style="background-color: #d9edf7">
+                <th ng-repeat="letter in letters">
+                    {{letter}}
+                    <!--{{waiting[letter].count}}-->
+                </th>
+            </tr>
+            <tr ng-repeat="i in longestRange">
+                <td ng-repeat="letter in letters">
+                    {{ waiting[letter].results[i].user_code }}
+                </td>
+            </tr>
+            <tr>
+                <td ng-repeat="letter in letters">
+                <div style="font-size:11px;padding:0px;margin:0px" ng-if="waiting[letter].count - longestRange.length > 0">
+                    (altri {{ waiting[letter].count - longestRange.length }})
+                </div>
+                </td>
+            </tr>
+            <tr ng-if="waiting[letter].count - longestRange.length === 0">
+                <td ng-repeat="letter in letters">-</td>
+            </tr>
+        </table>
+    </div>
+</div>

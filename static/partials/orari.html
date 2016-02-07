@@ -1,0 +1,19 @@
+<barra></barra>
+
+<div class="container">
+    <h3>A che ora si può prendere un biglietto?</h3>
+    Imposta gli orari di apertura e chiusura.
+    <div style="margin-top: 10px" class="input-group" ng-repeat="day in days">
+        <h4>{{ day.name }}</h4>
+        Apertura: <input type="time" ng-model="day.time_start">
+        Chiusura: <input type="time" ng-model="day.time_stop">
+        <button ng-if="$index === 0"
+                ng-click="copiaNegliAltri()"
+                style="margin-left:30px"
+                class="btn btn-sm btn-primary">
+            Copia negli altri giorni
+        </button>
+    </div>
+    <br>
+    <button class="btn btn-primary">Salva Impostazioni</button>
+</div>

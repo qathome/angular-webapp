@@ -1,0 +1,21 @@
+
+
+<div class="modal-header">
+    <h3 class="modal-title">
+        Biglietto
+        {{ticket.user_code}}
+    </h3>
+</div>
+<div class="modal-body" style="text-align: center">
+        <h3 ng-if="ticket.owner.first_name || ticket.owner.last_name">{{ticket.owner.first_name}} {{ticket.owner.last_name}}</h3>
+        <h4 ng-if="ticket.owner.email">email: {{ticket.owner.email}}</h4>
+        <h5>Codice di controllo: {{ticket.datetime_created}}</h5>
+    <br>
+    <button class="btn btn-primary" ng-click="callTicket()">Servi adesso</button>
+    <button class="btn btn-danger" ng-click="cancelTicket()">Cancella biglietto</button>
+
+</div>
+<div class="modal-footer">
+
+    <button class="btn btn-default" ng-click="closeDialog()">Chiudi</button>
+</div>

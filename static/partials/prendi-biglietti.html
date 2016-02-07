@@ -1,0 +1,16 @@
+<a href="#" ng-click="mostraBottone = !mostraBottone">
+    <!--<span class="caret-right"></span>-->
+    <span ng-if="!mostraBottone" class="glyphicon glyphicon-triangle-right"></span>
+    <span ng-if="mostraBottone" class="glyphicon glyphicon-triangle-bottom"></span>
+    Aggiungi un utente in coda
+</a>
+<br><br>
+
+<div ng-show="mostraBottone == true">
+    <button type="button" class="btn btn-default btn-lg"
+            ng-repeat="queue in queues" ng-click="clickOnQueue(queue)">
+        Prendi biglietto per l'utente
+        <!--(coda: {{queue.name}} {{queue.letter}})-->
+    </button>
+</div>
+

@@ -1,0 +1,54 @@
+<div class="col-md-6" style="padding-left: 0">
+
+    <h3>Ultimi numeri chiamati:</h3>
+
+    <div class="panel panel-default">
+        <table class="table">
+            <tr style="background-color: white; font-size:medium">
+                <th>Numero</th>
+                <th>Sportello</th>
+            </tr>
+            <tr ng-repeat="ticket in last" style="font-size:xx-large">
+                <td style="color: blue; font-weight: bold">{{ticket.user_code}}</td>
+                <td style="color: green; font-weight: bold">{{ticket.desk.name}}</td>
+                <!--<td>{{ticket.time_service_started}}</td>-->
+            </tr>
+            <tr ng-if="last.length === 0">
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-6" style="padding-left: 0; padding-right:0">
+
+    <h3>Prossimi in coda:</h3>
+
+    <div class="panel panel-default">
+        <table class="table" style="font-size: small">
+            <tr style="background-color: #d9edf7">
+                <th ng-repeat="letter in letters">
+                    {{letter}}
+                    <!--{{waiting[letter].count}}-->
+                </th>
+            </tr>
+            <tr ng-repeat="i in longestRange">
+                <td ng-repeat="letter in letters">
+                    {{ waiting[letter].results[i].user_code }}
+                </td>
+            </tr>
+            <tr>
+                <td ng-repeat="letter in letters">
+                <span ng-if="waiting[letter].count - longestRange.length > 0">
+                    (altri {{ waiting[letter].count - longestRange.length }})
+                </span>
+                </td>
+            </tr>
+            <tr ng-if="waiting[letter].count - longestRange.length === 0">
+                <td ng-repeat="letter in letters">-</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

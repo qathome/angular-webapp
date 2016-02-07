@@ -1,0 +1,39 @@
+<div>
+    <div ng-if="queues.length === 1">
+        <button ng-repeat="queue in queues" type="button"
+                class="btn btn-primary btn-md aggiungi-coda" ng-click="prendiBiglietto(queue)"
+                ng-disabled="queue.loading">
+            Aggiungi un utente in coda
+        </button>
+    </div>
+    <div ng-if="queues.length > 1">
+        <div style="margin-bottom:5px; font-size:large">Clicca per aggiungere un utente in coda:</div><br>
+        <button ng-repeat="queue in queues" type="button"
+                class="btn btn-primary btn-sm aggiungi-coda" ng-click="prendiBiglietto(queue)"
+                title="{{queue.description}}"
+                data-toggle="tooltip" data-placement="bottom"
+                ng-disabled="queue.loading">
+
+            <div ng-show="!queue.loading">
+                <span ng-if="queues.length > 1" style="font-size: large">{{queue.letter}}</span>
+                <br>
+                <span style="font-size: small">{{queue.name}}</span><br>
+            </div>
+
+            <span ng-show="queue.loading" class="glyphicon glyphicon-refresh spinner"></span>
+        </button>
+    </div>
+
+    <br>
+    <div ng-if="ultimoTicketAggiunto">
+        <span style="font-size: x-large">Hai preso il numero:</span>
+    </div>
+    <div class="nuovo-biglietto">
+        <div ng-if="ultimoTicketAggiunto">
+            <span style="font-size: xx-large; font-weight: bold">{{ultimoTicketAggiunto.user_code}}</span>
+            <span style="font-size: x-large;"> - prima di lui: {{ultimoTicketAggiunto.before_you}} persone</span><br>
+            <span style="font-size: x-large; font-weight: bold">Scrivi il numero all'utente!</span>
+        </div>
+    </div>
+    <span ng-if="!ultimoTicketAggiunto" style="font-size:xx-large">&nbsp;</span>
+</div>

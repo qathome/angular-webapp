@@ -1,0 +1,91 @@
+<!--<span style="font-size: xx-large">{{firm.name}}</span><br>-->
+<!--<span style="font-size: x-large">{{firm.description}}</span><br><br>-->
+<!--&lt;!&ndash;<h3 ng-if="firm.state == 'C'">FIRM CHIUSA</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;<h3 ng-if="firm.state == 'O'">FIRM APERTA</h3>&ndash;&gt;-->
+
+<!--<button ng-repeat="queue in queues" type="button"-->
+<!--class="btn btn-default btn-sm aggiungi-coda" ng-click="clickOnQueue(queue)"-->
+<!--title="{{queue.description}}"-->
+<!--data-toggle="tooltip" data-placement="top"-->
+<!--rel="tooltip">-->
+<!--<span style="font-size: large">{{queue.letter}}</span><br>-->
+<!--<span style="font-size: small">{{queue.name}}</span><br>-->
+<!--&lt;!&ndash;<span style="font-size: smaller">{{queue.description}}</span><br>&ndash;&gt;-->
+<!--</button>-->
+
+<!--<barra></barra>-->
+
+<div ng-if="nonTrovato" class="container" style="margin-top:20px">
+    <div class="alert alert-danger" role="alert" style="text-align: center;">
+        <h2>
+            "{{nonTrovato}}" non trovato.<br>
+        </h2>
+    </div>
+    <h1 style="text-align: center">
+        Hai scritto bene il nome della pagina?
+    </h1>
+</div>
+
+<div ng-if="!nonTrovato" class="container">
+
+    <div style="margin-top:20px">
+        <div ng-show="troppiBiglietti" class="alert alert-danger" role="alert">
+            Hai richiesto troppi biglietti.
+        </div>
+        <div ng-show="troppiBigliettiOggi" class="alert alert-danger" role="alert">
+            Numero massimo di biglietti on line esaurito, recati sul posto negli orari di apertura per essere servito.
+        </div>
+        <div ng-show="OrarioSbagliato" class="alert alert-danger" role="alert">
+            Adesso non puoi prendere un biglietto, l'emissione dei biglietti è chiusa.
+        </div>
+        <div ng-show="NoAnonimi" class="alert alert-danger" role="alert">
+            Biglietti anonimi non consentiti.
+        </div>
+    </div>
+
+    <h2>{{firm.name}} <span ng-if="firm.state == 'C'">(Chiuso)</span></h2>
+    <h4>{{firm.description}}</h4>
+    <h3>Prendi un biglietto:</h3>
+    <div ng-repeat="queue in queues">
+        <div class="panel panel-default" style="padding:10px;">
+            <div class="col-md-1 col-sx-12 valign elembutton" style="text-align: center;">
+                <span style="font-size: xx-large; font-weight: bold">{{queue.letter}}</span>
+            </div><!--
+            --><div class="col-md-5 col-sx-12 valign elembutton" style="text-align: center;">
+                <h2>{{queue.name}}</h2>
+                {{queue.description}}
+            </div><!--
+            --><div class="col-md-3 col-sx-12 valign elembutton" style="text-align: center;">
+                <button ng-if="queue.enable_now" ng-click="clickOnQueue(queue)" ng-disabled="queue.state == 'C' || firm.state == 'C' || !queue.can_take_ticket_now" class="btn btn-primary" style="width: 200px; height:30 px; white-space: normal">
+                    <div>
+                        <h4 ng-if="queue.state == 'O' && firm.state == 'O' && queue.can_take_ticket_now">Mettimi in coda adesso</h4>
+                        <h4 ng-if="queue.state == 'C' || firm.state == 'C' || (!queue.can_take_ticket_now && (queue.condition == 'Cannot take ticket with closed firm.'
+                                                               || queue.condition == 'Cannot take ticket with closed queue.' || queue.condition == 'Cannot take online ticket on this queue.'
+                                                               || queue.condition == 'Cannot take printer ticket on this queue.'))">Coda Chiusa</h4>
+                        <h4 ng-if="!queue.can_take_ticket_now && queue.condition == 'Too many tickets in this day.'">Coda chiusa per eccessiva affluenza</h4>
+                        <h4 ng-if="!queue.can_take_ticket_now && queue.condition == 'Anonymous tickets are not allowed.'">Registrati per prendere un biglietto</h4>
+                        {{queue.before_you}} persone in coda<br>
+                    <!--{{queue.stimaInMinuti}} di attesa-->
+                        <h5 ng-show="queue.ticketPricing.now" >{{queue.ticketPricing.now}}€</h5>
+                    </div>
+                </button>
+
+            </div><!--
+            --><div class="col-md-3 col-sx-12 valign elembutton" style="text-align: center;">
+                <button ng-if="queue.enable_book && firm.enable_book" ng-click="clickOnQueueScelta(queue)" ng-disabled="queue.state == 'C' || firm.state == 'C' || !queue.can_take_ticket_book" class="btn btn-primary" style="width: 200px; height:30 px; white-space: normal;">
+                    <div>
+                        <h4 ng-if="queue.state == 'O' && firm.state == 'O' && queue.can_take_ticket_book">Fammi servire ad un orario a mia scelta</h4>
+                        <h4 ng-if="queue.state == 'C' || firm.state == 'C' || (!queue.can_take_ticket_book && (queue.condition == 'Cannot take ticket with closed firm.'
+                                                               || queue.condition == 'Cannot take ticket with closed queue.'))">Prenotazione Chiusa</h4>
+                        <h4 ng-if="!queue.can_take_ticket_book && queue.condition == 'Anonymous tickets are not allowed.'">Registrati per prenotare</h4>
+                        <h5 ng-show="queue.ticketPricing.book" >{{queue.ticketPricing.book}}€</h5>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <pubblico params="tabellaPubblicaParams"></pubblico>
+
+</div>

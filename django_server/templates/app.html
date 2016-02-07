@@ -1,0 +1,102 @@
+<!doctype html>
+<html ng-app="qathome">
+
+<head>
+    <title>Qathome</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block description %}Fai la coda da casa - Svuota la sala d'attesa.{% endblock %}">
+    <meta name="keywords" content="gestore code queue management {% block keywords %}{% endblock %}"/>
+
+    <base href="/">
+
+    <style>
+        @font-face {
+            font-family: Lato;
+            src: url("/static/assets/font/lato/Lato-Regular.ttf"),
+            url("/static/assets/font/lato/Lato-Bold.ttf")
+        }
+
+        @font-face {
+            font-family: Montserrat;
+            src: url("/static/assets/font/montserrat/Montserrat-Regular.ttf"),
+            url("/static/assets/font/montserrat/Montserrat-Bold.ttf")
+        }
+
+        @font-face {
+            /* Il font del logo di QATHOME */
+            font-family: Brandon;
+            src: url("/static/assets/font/brandon_med-webfont.ttf"),
+            url("/static/assets/font/brandon_bld-webfont.ttf");
+        }
+    </style>
+
+    <link href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link id="theme-style" rel="stylesheet" href="/static/assets/css/styles-2.css">
+
+    <link rel="stylesheet" type="text/css" href="static/src/app.css">
+    <link rel="stylesheet" type="text/css" href="static/bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="/static/assets/tempo/assets/plugins/font-awesome/css/font-awesome.css">
+
+    <link rel="apple-touch-icon" href="favicon256.png">
+    <link rel="shortcut icon" type="image/x-icon" href="static/assets/favicon.ico">
+    <link rel="shortcut icon" type="image/ico" href="static/assets/favicon.ico">
+    <link rel="icon" type="image/png" href="static/assets/favicon.png"/>
+
+    <!-- build:js -->
+
+    <!-- bower:js -->
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static/bower_components/angular/angular.min.js"></script>
+    <script src="/static/bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/static/bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="/static/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/static/bower_components/lodash/lodash.min.js"></script>
+    <script src="/static/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/static/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/static/bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+    <!--<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.1.min.js"></script>-->
+    <script src="/static/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- endbower -->
+
+    <script type="application/x-javascript" src="/static/src/config.js"></script>
+    <script type="application/x-javascript" src="/static/modules.js"></script>
+    <script type="application/x-javascript" src="/static/src/locale.js"></script>
+    <script type="application/x-javascript" src="/static/src/directives.js"></script>
+    <script type="application/x-javascript" src="/static/src/settings.js"></script>
+    <script type="application/x-javascript" src="/static/src/app.js"></script>
+
+    <!-- endbuild -->
+</head>
+
+<body>
+    <header id="header" class="header">
+        <div class="container">
+            <h1 class="logo pull-left">
+                <a href="/" target="_self">
+                    <span style="line-height:40px; font-family: Brandon; font-weight: normal;">QATHOME</span>
+                </a>
+            </h1>
+            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-collapse">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <ng-view></ng-view>
+
+</body>
+
+</html>

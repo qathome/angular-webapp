@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "bower-main": "^0.2.13",
+    "grunt-angular-templates": "^0.5.7",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-include-source": "^0.4.5",
+    "grunt-usemin": "^3.0.0",
+    "grunt-wiredep": "^2.0.0",
+    "gulp": "^3.8.11",
+    "gulp-angular-templates": "0.0.1",
+    "gulp-bower": "0.0.10",
+    "gulp-concat": "^2.5.0",
+    "gulp-html-replace": "^1.4.4",
+    "gulp-inline-angular-templates": "^0.1.5",
+    "gulp-usemin": "^0.3.11",
+    "merge2": "^0.3.1"
+  }
+}

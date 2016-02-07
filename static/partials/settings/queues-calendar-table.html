@@ -1,0 +1,128 @@
+
+        <!--<label style="display:block; margin-top:20px; font-size: large">-->
+        <!--<input type="checkbox">-->
+        <!--Usa calendario automatico-->
+        <!--</label>-->
+
+        <style>
+            .inactive {
+                pointer-events: none;
+            }
+        </style>
+
+        <div ng-if="queues.length >= 1"
+             style="margin-top:20px"
+             ng-class="{ 'panel-primary': emissioneAttiva, 'inactive': !emissioneAttiva }">
+            <!--<div class="panel-heading">Emissione biglietti on-line sulle singole code</div>-->
+            <div class="panel-body">
+                    <span ng-show="!emissioneAttiva">
+                        Emissione biglietti disattivata.
+                    </span>
+                <table ng-show="emissioneAttiva" class="table">
+                    <tr>
+                        <th>Coda</th>
+                        <th>{{ nomeEmissione }}</th>
+                        <th ng-if="queues.length > 1">Azione</th>
+                        <th></th>
+                    </tr>
+                    <tr ng-repeat-start="queue in queues">
+                        <td>
+                            {{queue.letter}} {{ queue.name }}
+                        </td>
+                        <td>
+                            <div ng-show="!queue._loading">
+
+                                    <span ng-show="!isQueueOpen(queue)">
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                        Non Attiva
+                                    </span>
+
+                                    <span ng-show="isQueueOpen(queue)">
+                                        <span ng-show="getUsaCalendario(queue)">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                            Secondo il calendario
+                                        </span>
+                                        <span ng-show="!getUsaCalendario(queue)">
+                                            <span class="glyphicon glyphicon-ok" style="color: #00ce00"></span>
+                                            Attiva
+                                        </span>
+                                    </span>
+
+                            </div>
+                                <span ng-show="queue._loading"
+                                      style="font-size: xx-large"
+                                      class="glyphicon glyphicon-refresh spinner">
+                                </span>
+                        </td>
+                        <td ng-if="queues.length > 1">
+                            <div ng-show="!queue._loading">
+                                <button ng-show="!isQueueOpen(queue)" ng-click="openQueue(queue, true)">
+                                    Apri Coda
+                                </button>
+                                <button ng-show="isQueueOpen(queue)" ng-click="openQueue(queue, false)">
+                                    Chiudi Coda
+                                </button>
+                            </div>
+                                <span ng-show="queue._loading"
+                                      style="font-size: xx-large"
+                                      class="glyphicon glyphicon-refresh spinner">
+                                </span>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="checkbox"
+                                       ng-checked="getUsaCalendario(queue)"
+                                       ng-click="usaCalendarioAutomatico(queue)"
+                                       ng-disabled="!isQueueOpen(queue)">
+                                    <span ng-class="{ 'grey': !isQueueOpen(queue) }">
+                                        Usa calendario automatico
+                                    </span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr ng-repeat-end ng-if="getUsaCalendario(queue)">
+                        <td colspan="4">
+                            <blockquote>
+                                <table class="table" ng-show="getCalendarForQueue(queue).length > 0">
+                                    <tr>
+                                        <th>Giorno</th>
+                                        <th>Dalle</th>
+                                        <th>Alle</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr ng-repeat="weeklycalendar in getCalendarForQueue(queue)">
+                                        <td>{{ getDayName(weeklycalendar) }}</td>
+                                        <td>{{::weeklycalendar.time_start}}</td>
+                                        <td>{{::weeklycalendar.time_stop}}</td>
+                                        <td><button ng-click="rimuoviGiorno(weeklycalendar)">Rimuovi</button></td>
+                                    </tr>
+                                </table>
+                                <form class="form-inline" ng-init="queue._nuovo = {}">
+                                    <div class="form-group form-group-sm" style="margin-right:10px">
+                                        Giorno:
+                                        <select class="form-control" ng-model="queue._nuovo.weekday">
+                                            <option ng-repeat="day in days" value="{{day.value}}">
+                                                {{day.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group form-group-sm" style="margin-right:10px">
+                                        Dalle: <input class="form-control" type="time" ng-model="queue._nuovo.time_start"
+                                            placeholder="hh:mm - Esempio 09:00">
+                                    </div>
+                                    <div class="form-group form-group-sm" style="margin-right:10px">
+                                        Alle: <input class="form-control" type="time" ng-model="queue._nuovo.time_stop"
+                                            placeholder="hh:mm - Esempio 13:30">
+                                    </div>
+                                    <div class="form-group form-group-sm" style="margin-right:10px">
+                                        <button ng-click="aggiungiGiorno(queue)">Aggiungi</button>
+                                    </div>
+                                </form>
+                            </blockquote>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

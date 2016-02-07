@@ -1,0 +1,310 @@
+<barra></barra>
+
+<style>
+    .grey {
+        color: #d3d3d3;
+    }
+    .settings-tab {
+        /*margin-top:20px;*/
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        background-color: #428bca;
+        color:white;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+        border: 1px solid #428bca;
+    }
+    .nav-tabs {
+        border: none;
+    }
+</style>
+
+
+<div class="container" style="margin-top:20px">
+        <!--<div class="col-md-12 col-lg-12 col-xs-12">-->
+            <!--<ul class="navbar navbar-inverse navbar-collapse">-->
+                <!--<li ><a href="#">Attivita'</a></li>-->
+                <!--<li ><a href="#">Aggiungi Totem</a></li>-->
+                <!--<li><a href="#">Code</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+
+    <div class="col-md-12 col-lg-12 col-xs-12">
+        <uib-tabset>
+            <uib-tab heading="{{ 'ONLINE_TICKET_EMISSION' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <!--<div class="panel-heading">{{ 'ONLINE_TICKET_EMISSION' | translate }}</div>-->
+                    <div class="panel-body">
+                        <div style="margin-bottom:10px">
+                            <div ng-if="emissioneAttivaOnline">
+                                <span>{{ 'NOW_YOUR_USERS_CAN_QUEUE_UP' | translate }}</span>
+                                <a href="/{{::firm.url_name}}">qathome.com/{{::firm.url_name}}/</a>
+                            </div>
+                            <span ng-if="!emissioneAttivaOnline">{{ 'NOW_YOU_ARE_THE_ONLY_ONE_THAT_CAN_ADD_USERS_IN_LINE' | translate }}</span>
+                        </div>
+
+                        <input type="checkbox" name="emissioneAttivaOnline">
+
+                        <calendari-emissione-online></calendari-emissione-online>
+                    </div>
+                </div>
+            </uib-tab>
+            <!--<uib-tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">-->
+                <!--{{tab.content}}-->
+            <!--</uib-tab>-->
+            <!--<uib-tab select="alertMe()">-->
+                <!--<uib-tab-heading>-->
+                    <!--<i class="glyphicon glyphicon-bell"></i> Alert!-->
+                <!--</uib-tab-heading>-->
+                <!--I've got an HTML heading, and a select callback. Pretty cool!-->
+            <!--</uib-tab>-->
+
+            <uib-tab heading="{{ 'KIOSK_TICKET_EMISSION' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        <div style="margin-bottom:10px">
+                            <div ng-if="emissioneAttivaTotem">
+                                <span>{{ 'NOW_THE_KIOSK_PRINTS' | translate }}</span>
+                            </div>
+                            <span ng-if="!emissioneAttivaTotem">{{ 'NOW_THE_KIOSK_DOES_NOT_PRINT' | translate }}</span>
+                        </div>
+
+                        <input type="checkbox" name="emissioneAttivaTotem">
+
+                        <calendari-totem></calendari-totem>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="{{ 'KIOSK' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-xs-12">
+                                <table class="table" ng-if="firm.publicpcs.length > 0 || nuovoTotem">
+                                    <thead>
+                                        <th>{{ 'KIOSK' | translate }}</th>
+                                        <th>{{ 'DESCRIPTION' | translate }}</th>
+                                        <th>{{ 'PIN' | translate }}</th>
+                                        <th>{{ 'KIOSK_ADDRESS' | translate }}</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="pc in firm.publicpcs">
+                                        <td>{{::pc.username}}</td>
+                                        <td>{{::pc.description}}</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr ng-show="nuovoTotem" style="font-size: large; font-weight: bold">
+                                        <td>{{nuovoTotem.username}}</td>
+                                        <td>{{nuovoTotem.description}}</td>
+                                        <td>{{nuovoTotem.pin}}</td>
+                                        <td><a href="{{nuovoTotem.printer_link}}">{{nuovoTotem.printer_link}}</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <br>
+                                    Clicca su "Aggiungi Totem" per ottenere l'indirizzo web e il pin del totem. <br>
+                                    Attenzione! Per garantire la tua massima sicurezza <span style="color:red">IL PIN SCOMPARIRA' !</span> <br>
+                                    Se dimentichi il pin puoi sempre creare un nuovo totem.
+                                    <br>
+                                    <br>
+                                </div>
+                                <button class="btn btn-info" ng-click="aggiungiTotem()">{{ 'ADD_KIOSK' | translate }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="{{ 'RESERVATIONS' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        <div style="margin-bottom:10px">
+                            <div ng-if="emissioneAttivaPrenotazioni">
+                        <span>
+                            {{ 'SERVICE_UNDER_DEVELOPMENT_THANK_YOU_FOR_YOUR_CLICK' | translate }}
+                            <!--{{ 'YOUR_USERS_CAN_MAKE_A_RESERVATION' | translate }}-->
+                            <!--<a href="/{{firm.url_name}}">http://qathome.com/{{firm.url_name}}</a>-->
+                            <!--{{ 'ACCORDING_TO_THE_RESERVATION_CALENDAR' | translate }}-->
+                        </span>
+                            </div>
+                            <span ng-if="!emissioneAttivaPrenotazioni">{{ 'NOW_RESERVATIONS_ARE_NOT_ACCEPTED' | translate }}</span>
+                        </div>
+
+                        <input type="checkbox" name="emissioneAttivaPrenotazioni">
+
+                        <prenotazioni></prenotazioni>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="{{ 'PLACE' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        <div class="col-md-12 col-lg-12 col-xs-12">
+                            {{ 'CHECK_WHAT_YOUR_USERS_SEE_AT' | translate }}
+                            <a href="/{{::firm.url_name}}">qathome.com/{{::firm.url_name}}/</a>
+                            <br/><br/>
+                            <div class="form-group">
+                                {{ 'NAME' | translate }}<input class="form-control" type="text" ng-model="firm.name">
+                            </div>
+                            <div ng-show="attivitaError" style="color:red;">{{attivitaError.name[0]}}</div>
+                            <div class="form-group">
+                                {{ 'DESCRIPTION' | translate }}<textarea class="form-control" type="text"
+                                                                         ng-model="firm.description"></textarea>
+                            </div>
+                            <div ng-show="attivitaError" style="color:red;">{{attivitaError.description[0]}}</div>
+                            <div class="form-group">
+                                {{ 'PUBLIC_ADDRESS' | translate }}
+                                <div class="input-group">
+                                    <div class="input-group-addon">qathome.com/</div>
+                                    <input type="text" class="form-control" ng-model="firm.url_name">
+                                </div>
+                            </div>
+                            <div ng-show="attivitaError" style="color:red;">{{attivitaError.url_name[0]}}</div>
+                            <br/>
+                            <button class="btn btn-default" ng-click="salvaAttivita()">{{ 'SAVE_CHANGES' | translate }}</button>
+                            <br/><br/>
+                            <div ng-show="attivitaFatto">{{ 'CHANGES_SAVED' | translate }}</div>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="{{ 'QUEUES' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        {{ 'CHECK_WHAT_YOUR_USERS_SEE_AT' | translate }}
+                        <a href="/{{::firm.url_name}}/">qathome.com/{{::firm.url_name}}/</a>
+                        <br/><br/>
+                        <table class="table">
+                            <thead>
+                            <th>{{ 'LETTER' | translate }}</th>
+                            <th>{{ 'NAME' | translate }}</th>
+                            <th>{{ 'DESCRIPTION' | translate }}</th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="queue in queues">
+                                <td>
+                                    <input class="form-control" type="text" ng-model="queue.letter" maxlength="1" size="1">
+                                    <div ng-show="queue._error" style="color:red;">{{queue._error.letter[0]}}</div>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" ng-model="queue.name" size="10">
+                                    <div ng-show="queue._error" style="color:red;">{{queue._error.name[0]}}</div>
+                                </td>
+                                <td>
+                                    <div class="form-group form-group-sm">
+                                        <textarea class="form-control" type="text" ng-model="queue.description"></textarea>
+                                        <div ng-show="queue._error" style="color:red;">{{queue._error.description[0]}}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <button class="form-control" ng-click="saveQueue(queue)">{{ 'SAVE_CHANGES' | translate }}</button>
+                                        <button class="form-control" ng-click="removeQueue(queue)">
+                                            <i class="glyphicon glyphicon-remove"></i> {{ 'REMOVE' | translate }}</button>
+                                        <div ng-show="queue._fatto">{{ 'CHANGES_SAVED' | translate }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-init="queue = {}">
+                                <td>
+                                    <input class="form-control" type="text" ng-model="queue.letter" maxlength="1" size="1" placeholder="Es: B">
+                                    <div ng-show="queue._error" style="color:red;">{{queue._error.letter[0]}}</div>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" ng-model="queue.name" size="10" placeholder="Es: Dott Rossi Coda B">
+                                    <div ng-show="queue._error" style="color:red;">{{queue._error.name[0]}}</div>
+                                </td>
+                                <td>
+                                    <div class="form-group form-group-sm">
+                                        <textarea class="form-control" type="text" ng-model="queue.description" placeholder="Es: Rossi è disponibile lun-ven dalle 9 alle 12"></textarea>
+                                        <div ng-show="queue._error" style="color:red;">{{queue._error.description[0]}}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <button class="form-control" ng-click="addQueue(queue)">Aggiungi Coda</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </uib-tab>
+            <uib-tab heading="{{ 'DESKS' | translate }}">
+                <div class="panel panel-default settings-tab">
+                    <div class="panel-body">
+                        {{ 'CHECK_THESE_SETTINGS_AT' | translate }}
+                        <a href="/app/firms/{{currentFirm.url_id}}">{{ 'DESKS_PAGE' | translate }}</a>
+                        <br/><br/>
+                        <table class="table">
+                            <thead>
+                            <th>{{ 'NAME' | translate }}</th>
+                            <th>{{ 'DESCRIPTION' | translate }}</th>
+                            <th>{{ 'CALLED_LETTER' | translate }}</th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="desk in desks">
+                                <td>
+                                    <input class="form-control" type="text" ng-model="desk.name">
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.name[0]}}</div>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" ng-model="desk.description" size="10">
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.description[0]}}</div>
+                                </td>
+                                <td>
+                                    <!--{{desk.queue.letter}} ({{desk.queue.name}})-->
+                                    <select class="form-control"
+                                            ng-options="queue as queue.name+' ('+queue.letter+')' for queue in queues track by queue.letter"
+                                            ng-model="desk.queue">
+                                    </select>
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.letter[0]}}</div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <button class="form-control" ng-click="saveDesk(desk)">{{ 'SAVE_CHANGES' | translate }}</button>
+                                        <button class="form-control" ng-click="removeDesk(desk)">
+                                            <i class="glyphicon glyphicon-remove"></i> {{ 'REMOVE' | translate }}</button>
+                                        <div ng-show="desk._fatto">{{ 'CHANGES_SAVED' | translate }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-init="desk = {}">
+                                <td>
+                                    <input class="form-control" type="text" ng-model="desk.name" placeholder="Es: Sportello 2">
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.name[0]}}</div>
+                                </td>
+                                <td>
+                                    <input class="form-control" type="text" ng-model="desk.description" size="10" placeholder="Es: Piano terra">
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.description[0]}}</div>
+                                </td>
+                                <td>
+                                    <select class="form-control"
+                                            ng-options="queue as queue.name+' ('+queue.letter+')' for queue in queues track by queue.letter"
+                                            ng-model="desk.queue">
+                                    </select>
+                                    <div ng-show="desk._error" style="color:red;">{{desk._error.queue_choices[0]}}</div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <button class="form-control" ng-click="addDesk(desk)">Aggiungi Sportello</button>
+                                        <div ng-show="desk._fatto">{{ 'CHANGES_SAVED' | translate }}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>
+
+</div>

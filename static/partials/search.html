@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <h1>Dove ti vuoi mettere in coda&#160;?</h1>
+            <form>
+                <div class="input-group input-group-lg">
+                    <input class="form-control" ng-model="inputKey" type="text"
+                           placeholder="es. Studio Medico Dott. Verdi"/>
+                <span class="input-group-btn">
+                    <input ng-click="search()"
+                           type="submit" class="btn btn-default" type="button"
+                           value="Cerca"/>
+                </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <div class="" role="alert" ng-show="error">
+                <br>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{error}}
+            </div>
+            <div ng-show="results.length > 0">
+                <ul style="margin-top: 20px">
+                    <li ng-repeat="result in results" style="margin-bottom: 20px">
+                        <a href="/{{result.url_name}}" target="_self" style="font-size: 25px">
+                            {{result.name}}
+                        </a><br>
+                        <span>{{result.description}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-xs-12" style="margin-top:50px">
+            <div class="panel panel-default" style="text-align: center">
+                <div class="panel-body">
+                    <h4 style="margin-top: 0">Vuoi soltanto provare QATHOME&#160;?</h4>
+                    <a href="/dottore" class="btn btn-primary">
+                        Prendi un biglietto di prova<br/>
+                        in una coda dimostrativa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

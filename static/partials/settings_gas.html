@@ -1,0 +1,40 @@
+<barra></barra>
+
+<div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ firm.name }}</h3>
+      </div>
+          <table class="table">
+              <tr>
+                  <td>Nome del Servizio:</td>
+                  <td><input type="text" ng-model="firm.name" class="form-control" placeholder="nome del servizio"></td>
+                  <td>nome visualizzato dagli utenti nella pagina per prendere i biglietti</td>
+              </tr>
+              <tr>
+                  <td>Descrizione del Servizio:</td>
+                  <td><input type="text" ng-model="firm.description" class="form-control" placeholder="descrizione del servizio"></td>
+                  <td>descrizione del servizio: orari, luogo</td>
+              </tr>
+              <tr>
+                  <td>Nome dell'indirizzo web: <br/> qathome.com/{{ firm.url_name }}</td>
+                  <td><input type="text" ng-model="firm.url_name" class="form-control" placeholder="link al servizio"></td>
+                  <td>è il link utilizzato dagli utenti per raggiungere la pagina del tuo servizio</td>
+              <tr>
+            <td style="font-size: medium" >Emissione biglietti on-line:</td>
+            <td><input type="checkbox" name="sportelliAttivi"></td>
+            <td>        <div ng-if="emimssioneAttiva">Adesso i tuoi utenti possono mettersi in coda da casa.</div>
+        <div ng-if="!emimssioneAttiva">Adesso solo tu puoi aggiungere utenti in coda.</div></td>
+          </tr>
+          <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+          </tr>
+        </table>
+
+        <span></span>
+
+
+      <div class="panel-footer">Panel footer</div>
+    </div>
