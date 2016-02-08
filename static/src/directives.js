@@ -1,5 +1,69 @@
+function getToken($http,$cookies,mygetMe){
+    var params = {
+        grant_type: "password",
+        client_id: QATHOME_CLIENT_CONFIG.client_id,
+        client_secret: QATHOME_CLIENT_CONFIG.client_secret,
+        username: QATHOME_CLIENT_CONFIG.username,
+        password: QATHOME_CLIENT_CONFIG.password
+    };
+    $http({
+        method: 'POST',
+        url: QATHOME_CLIENT_CONFIG.server + '/api/v1/token/',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function (obj) {
+            var str = [];
+            for (var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        },
+        data: params
+    })
+    .success(function (data, status) {
+        QATHOME_CLIENT_CONFIG.token = data;
+        $cookies.put('QATHOME_CLIENT_CONFIG_TOKEN', angular.toJson(QATHOME_CLIENT_CONFIG.token));
+        if(mygetMe) {
+            mygetMe();
+        }
+    });
+}
+
+function getRefreshToken($http, $cookies, mygetMe){
+    if(QATHOME_CLIENT_CONFIG.token) {
+        var params = {
+            grant_type: "refresh_token",
+            client_id: QATHOME_CLIENT_CONFIG.client_id,
+            client_secret: QATHOME_CLIENT_CONFIG.client_secret,
+            refresh_token: QATHOME_CLIENT_CONFIG.token.refresh_token
+        };
+        $http({
+            method: 'POST',
+            url: QATHOME_CLIENT_CONFIG.server + '/api/v1/token/',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            transformRequest: function (obj) {
+                var str = [];
+                for (var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        })
+        .success(function (data, status) {
+            QATHOME_CLIENT_CONFIG.token = data;
+            $cookies.put('QATHOME_CLIENT_CONFIG_TOKEN', angular.toJson(QATHOME_CLIENT_CONFIG.token));
+            if (mygetMe) {
+                mygetMe();
+            }
+        })
+        .error(function (data, status) {
+            getToken($http, $cookies);
+        });
+    }else{
+        getToken($http, $cookies);
+    }
+}
+
 angular.module('qathome')
-    .factory('HttpInjector', function($cookies) {
+    .factory('HttpInjector', function($injector) {
         return {
             request: function(config) {
                 if(config.url.indexOf('/api/') !== -1) {
@@ -14,23 +78,15 @@ angular.module('qathome')
                     }
                 }
                 return config;
+            },
+            responseError: function(rejection) {
+                if(rejection.status==401){
+                    var $http = $injector.get('$http');
+                    var $cookies = $injector.get('$cookies');
+                    getRefreshToken($http,$cookies);
+                }
+                throw rejection
             }
-            //responseError: function(rejection) {
-            //    console.log('CAZZO');
-            //    var params = $.param({
-            //        grant_type: "password",
-            //        client_id: QATHOME_CLIENT_CONFIG.client_id,
-            //        client_secret: QATHOME_CLIENT_CONFIG.client_secret,
-            //        username: QATHOME_CLIENT_CONFIG.username,
-            //        password: QATHOME_CLIENT_CONFIG.password
-            //    });
-            //    var $http = $injector.get('$http');
-            //    $http.post(QATHOME_CLIENT_CONFIG.server + '/api/v1/token/', params)
-            //        .success(function (data, status) {
-            //            QATHOME_CLIENT_CONFIG.token = data;
-            //            console.log('BILLO');
-            //        });
-            //}
         };
     })
     .factory('Identity', function ($http, $rootScope, $cookies, $location) {
@@ -41,72 +97,14 @@ angular.module('qathome')
                 return $cookies.get('sessionid') != null;
             },
             getMe: function getMe(cb) {
-                function getRefreshToken(){
-                    var params = {
-                        grant_type: "refresh_token",
-                        client_id: QATHOME_CLIENT_CONFIG.client_id,
-                        client_secret: QATHOME_CLIENT_CONFIG.client_secret,
-                        refresh_token: QATHOME_CLIENT_CONFIG.token.refresh_token
-                    };
-                    $http({
-                        method: 'POST',
-                        url: QATHOME_CLIENT_CONFIG.server + '/api/v1/token/',
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function (obj) {
-                            var str = [];
-                            for (var p in obj)
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            return str.join("&");
-                        },
-                        data: params
-                    })
-                    .success(function (data, status) {
-                        QATHOME_CLIENT_CONFIG.token = data;
-                        $cookies.put('QATHOME_CLIENT_CONFIG_TOKEN', angular.toJson(QATHOME_CLIENT_CONFIG.token));
-                        mygetMe();
-                    })
-                    .error(function (data, status) {
-                        getToken();
-                    });
-                }
-                function getToken(){
-                    var params = {
-                        grant_type: "password",
-                        client_id: QATHOME_CLIENT_CONFIG.client_id,
-                        client_secret: QATHOME_CLIENT_CONFIG.client_secret,
-                        username: QATHOME_CLIENT_CONFIG.username,
-                        password: QATHOME_CLIENT_CONFIG.password
-                    };
-                    $http({
-                        method: 'POST',
-                        url: QATHOME_CLIENT_CONFIG.server + '/api/v1/token/',
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function (obj) {
-                            var str = [];
-                            for (var p in obj)
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            return str.join("&");
-                        },
-                        data: params
-                    })
-                    .success(function (data, status) {
-                        QATHOME_CLIENT_CONFIG.token = data;
-                        //console.log(angular.toJson(QATHOME_CLIENT_CONFIG.token));
-                        $cookies.put('QATHOME_CLIENT_CONFIG_TOKEN', angular.toJson(QATHOME_CLIENT_CONFIG.token));
-                        mygetMe();
-                    });
-                }
                 function mygetMe(){
                     $http.get('/api/v1/me/')
                         .success(function (data, status) {
                             $rootScope.me = data;
-
                             if (cb) cb(data);
                         })
                         .error(function (data, status) {
-                            console.log('ERRORE');
-                            getRefreshToken();
-                            $location.path('/accounts/login/');
+                            getRefreshToken($http, $cookies, mygetMe);
                         });
                 }
                 if ($rootScope.me) {
@@ -116,9 +114,9 @@ angular.module('qathome')
                     var cookie_token = angular.fromJson($cookies.get('QATHOME_CLIENT_CONFIG_TOKEN'));
                     if(cookie_token){
                         QATHOME_CLIENT_CONFIG.token = cookie_token;
-                        mygetMe()
+                        mygetMe();
                     }else {
-                        getToken();
+                        getToken($http, $cookies,mygetMe);
                     }
                 }
             },
@@ -142,7 +140,6 @@ angular.module('qathome')
             var ticketUrl = firm.tickets_url + ticket.id_for_firm + '/';
             $http.patch(ticketUrl, { state: 'D' })
                 .success(function(data, status) {
-                    console.log(data, status);
                     $uibModalInstance.close({ cancelTicket: true });
                 })
                 .error(defaultError);

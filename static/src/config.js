@@ -1,8 +1,8 @@
 
 var QATHOME_CLIENT_CONFIG = {
-    server: 'http://qathome-dev.herokuapp.com',
-    client_id: 'XTXHCin4JGc3EHCZegM0QuuWEEtdWVxWfPepZSfH',
-    client_secret: 'v3TfL6FNA9R0Zx4evG3acSghp6DiqVJx364hi3DY9CyKIl7ouxYPLkxBkwazBrgFzsDj9BUZvXROO2bNI0cMlowbvUyIkeBXaHhpMIky1nv18pGwF4J7ZalDJvVNXv6K',
+    server: 'http://127.0.0.1:8888',
+    client_id: 'MELlSwOp0kG2i28QCGSKL0wyWAjph7oE3nZkDlM5',
+    client_secret: 'vDynNPUwgalBhdTUrHsOydw9bw2XeHA8VDW1nX5mLhzhkI1Kg4yjuLwl2uskmPvLzBdbTuA4AAPAcexJc9ELIQevFoMlpqUFamfQonlAh2TUykjxnHFw8JJmkmb8yDoL',
     //token:{
     //    scope: "groups read write",
     //    access_token: "e1GjuCla3dmCmVrqypliP3dkAK0daN",
