@@ -16,9 +16,11 @@ Install using `pip`...
 
 # Setup
 
-1. Create an user on QatHome http://qathome.com
-2. Create your personal application on http://qathome.com/developer/applications/
-3. Now edit the `static/src/config.js`:
+1. Create an manager user on QatHome http://qathome.com
+2. Create your personal firm
+3. Create your personal application on http://qathome.com/developer/applications/
+4. Now edit the `static/src/config.js`:
+
     ```
     var QATHOME_CLIENT_CONFIG = {
         server: 'http://qathome.com',
@@ -32,6 +34,6 @@ Install using `pip`...
     * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
     * insert your 'USERNAME' and 'PASSWORD'
     * replace string 'FIRM_ID' with the code of your firm.
-4. Run the application:
+5. Run the application:
     
     ./manage.py runserver
