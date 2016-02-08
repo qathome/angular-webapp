@@ -20,7 +20,6 @@ Install using `pip`...
 1. Create an user on QatHome http://qathome.com
 2. Create your personal application on http://qathome.com/developer/applications/
 3. Now edit the `static/src/config.js`:
-
 ```javescript
 var QATHOME_CLIENT_CONFIG = {
     server: 'http://qathome.com',
@@ -31,9 +30,6 @@ var QATHOME_CLIENT_CONFIG = {
     firm_id: 'FIRM_ID'
 };
 ```    
-   * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
-   * insert your 'USERNAME' and 'PASSWORD'
-   * replace string 'FIRM_ID' with the code of your firm.
 4. Run the application:
     
     ./manage.py runserver
