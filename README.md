@@ -22,19 +22,18 @@ Install using `pip`...
 3. Now edit the `static/src/config.js`:
 
 ```javescript
-    var QATHOME_CLIENT_CONFIG = {
-        server: 'http://qathome.com',
-        client_id: 'CLIENT_ID',
-        client_secret: 'CLIENT_SECRET',
-        username: 'USERNAME',
-        password: 'PASSWORD',
-        firm_id: 'FIRM_ID'
-    };
+var QATHOME_CLIENT_CONFIG = {
+    server: 'http://qathome.com',
+    client_id: 'CLIENT_ID',
+    client_secret: 'CLIENT_SECRET',
+    username: 'USERNAME',
+    password: 'PASSWORD',
+    firm_id: 'FIRM_ID'
+};
 ```    
-        * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
-        * insert your 'USERNAME' and 'PASSWORD'
-        * replace string 'FIRM_ID' with the code of your firm.
-
+   * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
+   * insert your 'USERNAME' and 'PASSWORD'
+   * replace string 'FIRM_ID' with the code of your firm.
 4. Run the application:
     
     ./manage.py runserver
