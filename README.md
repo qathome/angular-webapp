@@ -7,7 +7,6 @@ Minimal client to create your personal QatHome webapp.
 # Requirements
 
 * Python (2.7, 3.2, 3.3, 3.4, 3.5)
-* Django (1.7, 1.8, 1.9)
 
 # Installation
 
@@ -17,9 +16,9 @@ Install using `pip`...
 
 # Setup
 
-1. Create an user on QatHome http://qathome.com
-2. Create your personal application on http://qathome.com/developer/applications/
-3. Now edit the `static/src/config.js`:
+1.Create an user on QatHome http://qathome.com
+2.Create your personal application on http://qathome.com/developer/applications/
+3.Now edit the `static/src/config.js`:
 ```javescript
 var QATHOME_CLIENT_CONFIG = {
     server: 'http://qathome.com',
@@ -30,7 +29,7 @@ var QATHOME_CLIENT_CONFIG = {
     firm_id: 'FIRM_ID'
 };
 ```    
-4. Run the application:
+4.Run the application:
     
     ./manage.py runserver
 
