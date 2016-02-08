@@ -1,5 +1,5 @@
 angular.module('qathome')
-    .factory('HttpInjector', function() {
+    .factory('HttpInjector', function($injector) {
         return {
             request: function(config) {
                 if(config.url.indexOf('/api/') !== -1) {
@@ -8,11 +8,28 @@ angular.module('qathome')
                         // Aggiungiamo il server alla url solo se non e' gia' stato aggiunto
                         config.url = QATHOME_CLIENT_CONFIG.server + config.url;
                     }
-
-                    var token = QATHOME_CLIENT_CONFIG.token;
-                    config.headers['Authorization'] = token.token_type + " " + token.access_token;
+                    if(QATHOME_CLIENT_CONFIG.token) {
+                        var token = QATHOME_CLIENT_CONFIG.token;
+                        config.headers['Authorization'] = token.token_type + " " + token.access_token;
+                    }
                 }
                 return config;
+            },
+            responseError: function(rejection) {
+                console.log('CAZZO');
+                var params = $.param({
+                    grant_type: "password",
+                    client_id: QATHOME_CLIENT_CONFIG.client_id,
+                    client_secret: QATHOME_CLIENT_CONFIG.client_secret,
+                    username: QATHOME_CLIENT_CONFIG.username,
+                    password: QATHOME_CLIENT_CONFIG.password
+                });
+                var $http = $injector.get('$http');
+                $http.post(QATHOME_CLIENT_CONFIG.server + '/api/v1/token/', params)
+                    .success(function (data, status) {
+                        QATHOME_CLIENT_CONFIG.token = data;
+                        console.log('BILLO');
+                    });
             }
         };
     })
