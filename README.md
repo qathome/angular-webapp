@@ -31,9 +31,9 @@ Install using `pip`...
         firm_id: 'FIRM_ID'
     };
 ```    
-    * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
-    * insert your 'USERNAME' and 'PASSWORD'
-    * replace string 'FIRM_ID' with the code of your firm.
+        * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
+        * insert your 'USERNAME' and 'PASSWORD'
+        * replace string 'FIRM_ID' with the code of your firm.
 
 4. Run the application:
     
