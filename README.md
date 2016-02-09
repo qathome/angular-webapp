@@ -2,11 +2,13 @@
 
 # Overview
 
-Minimal client to create your personal QatHome webapp.
+Qathome API is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
+
+This is a freely licensed minimal client to create your queue management / reservation management web-app based on Qathome API. You ca
 
 # Requirements
 
-* Python (2.7, 3.2, 3.3, 3.4, 3.5)
+* [Python 2.7] (http://askubuntu.com/questions/101591/how-do-i-install-python-2-7-2-on-ubuntu/101595) (releases after 2.7 have not been tested)
 
 # Installation
 
@@ -16,9 +18,9 @@ Install using `pip`...
 
 # Setup
 
-1. Create an manager user on QatHome http://qathome.com
-2. Create your personal firm
-3. Create your personal application on http://qathome.com/developer/applications/
+1. Create an account to 'manage your queue' on [QatHome] (http://www.qathome.com/accounts/signup/manager)
+2. Validate email and create your firm
+3. Create your application on http://qathome.com/developer/applications/
 4. Now edit the `static/src/config.js`:
 
     ```
