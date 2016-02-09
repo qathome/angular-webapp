@@ -2,9 +2,9 @@
 
 # Overview
 
-Qathome is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
+[Qathome] (http://www.qathome.com) is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
 
-This is a freely licensed minimal client to create your queue management / reservation management web-app based on [Qathome API] (http://www.qathome.com/pricing-api). 
+This is a freely licensed minimal client to create your queue management / reservation management web-app based on Qathome API. You can use it for example to rebrand QatHome interface, sell this service to others, see some working examples of advanced queue management settings such as calendars, maximum daily tickets limits and so on. 
 
 # Requirements
 
@@ -18,6 +18,7 @@ This is a freely licensed minimal client to create your queue management / reser
     ./configure
     make
     ```
+    
 # Installation
 
 Clone this project and navigate to project folder. Install requirements
@@ -28,17 +29,9 @@ Clone this project and navigate to project folder. Install requirements
 
 1. Create an account to 'manage your queue' on [QatHome] (http://www.qathome.com/accounts/signup/manager)
 2. Follow instructions to validate your email and create your firm, until you reach the help page in the queue manager interface
-3. Mark yourself as a developer by following the next steps
-4. Go to API interface http://www.qathome.com/api/v1/ 
-5. Login with your email and password
-6. Navigate users list http://www.qathome.com/api/v1/users/
-7. Find to your specific user link in the "ulr" field (example http://www.qathome.com/api/v1/users/8/)
-8. Go to your user link
-9. Mark the "developer" checkbox at the end of the page and click PUT
-8. Now you are a QatHome developer
-9. Create your application on http://qathome.com/developer/applications/ (link is available for developer users and after login)
-10. QatHome follows the django-allauth standards so feel free to choose what you need (Use for example "Client type" = "Public", "Authorization grant type" = "Client credentials", nothing into "redirect uris")
-11. Go to project folder and edit `static/src/config.js`:
+3. Create your application on http://qathome.com/developer/applications/ (link is available only AFTER LOGIN)
+4. QatHome follows the [OAuth 2.0] (http://tools.ietf.org/html/rfc6749) standard so feel free to choose what you need (Use for example "Client type" = "Public", "Authorization grant type" = "Resource owner password-based", nothing into "redirect uris")
+5. Go to project folder and edit `static/src/config.js`:
     ```
     var QATHOME_CLIENT_CONFIG = {
         server: 'http://qathome.com',
@@ -51,9 +44,11 @@ Clone this project and navigate to project folder. Install requirements
     ```
     * replace string CLIENT_ID, CLIENT_SECRET with your QatHome application client_id and client_secret 
     * replace string USERNAME and PASSWORD with your QatHome account email and password
-    * replace string 'FIRM_ID' with the code of your firm.
+    * replace string FIRM_ID with your firm id that you can find in the url after login in the queue manager interface. For example: if the url is http://www.qathome.com/app/firms/45cbde9e-0dd1-34c4-bf4a-acf92eaf1706/desks/1 then the firm id is 45cbde9e-0dd1-34c4-bf4a-acf92eaf1706
     
 12. Run the application from project root folder:
     ```
     ./manage.py runserver
     ```
+    
+13. Type 127.0.0.1:8000 in your favourite browser address bar
