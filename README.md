@@ -2,9 +2,11 @@
 
 # Overview
 
-[Qathome] (http://www.qathome.com) is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
+[Qathome] (http://www.qathome.com) is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested!
 
-This is a freely licensed minimal client to create your queue management / reservation management web-app based on Qathome API. You can use it for example to rebrand QatHome interface, sell this service to others, see some working examples of advanced queue management settings such as calendars, maximum daily tickets limits and so on. 
+This is a freely licensed minimal client to create your queue management / reservation management web-app based on Qathome API. The setup takes no more than one hour and your are ready to rebrand QatHome interface, sell this service to others, see some working examples of advanced settings such as multiservice queues, custom calendars, maximum daily tickets limits and so on. 
+
+ If you want to know more, [contact us] (http://www.qathome.com/contact)!
 
 # Requirements
 
