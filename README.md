@@ -8,13 +8,21 @@ This is a freely licensed minimal client to create your queue management / reser
 
 # Requirements
 
-* Python 2.7 (releases after 2.7 have not been tested)
+* Pip
+* Python 2.7 (this release is tested on 2.7.5 only)
 
+    ```
+    sudo apt-get install python-pip
+    wget http://python.org/ftp/python/2.7.5/Python-2.7.5.tgz
+    cd Python-2.7.5
+    ./configure
+    make
+    ```
 # Installation
 
-Clone this project and navigate to project folder. Install requirements.txt, for example using `pip`...
+Clone this project and navigate to project folder. Install requirements
 
-    pip install -r requirements.txt
+    sudo pip install -r requirements.txt
 
 # Setup
 
@@ -28,10 +36,9 @@ Clone this project and navigate to project folder. Install requirements.txt, for
 8. Go to your user link
 9. Mark the "developer" checkbox at the end of the page and click PUT
 8. Now you are a QatHome developer
-9. Create your application on http://qathome.com/developer/applications/ (link is not available for non-developer users)
+9. Create your application on http://qathome.com/developer/applications/ (link is available for developer users and after login)
 10. QatHome follows the django-allauth standards so feel free to choose what you need (Use for example "Client type" = "Public", "Authorization grant type" = "Client credentials", nothing into "redirect uris")
-4. Now edit the `static/src/config.js`:
-
+11. Go to project folder and edit `static/src/config.js`:
     ```
     var QATHOME_CLIENT_CONFIG = {
         server: 'http://qathome.com',
@@ -42,9 +49,11 @@ Clone this project and navigate to project folder. Install requirements.txt, for
         firm_id: 'FIRM_ID'
     };
     ```
-    * replace string 'CLIENT_ID', 'CLIENT_SECRET' with your QatHome application client_id and client_secret 
-    * insert your 'USERNAME' and 'PASSWORD'
+    * replace string CLIENT_ID, CLIENT_SECRET with your QatHome application client_id and client_secret 
+    * replace string USERNAME and PASSWORD with your QatHome account email and password
     * replace string 'FIRM_ID' with the code of your firm.
-5. Run the application:
     
+12. Run the application from project root folder:
+    ```
     ./manage.py runserver
+    ```
