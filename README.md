@@ -2,25 +2,34 @@
 
 # Overview
 
-Qathome API is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
+Qathome is the latest evolution in queue management and reservation management. It's reliable, fast, scalable, and carefully tested! If you want to know more, [contact us] (http://www.qathome.com/contact)!
 
-This is a freely licensed minimal client to create your queue management / reservation management web-app based on Qathome API. You ca
+This is a freely licensed minimal client to create your queue management / reservation management web-app based on [Qathome API] (http://www.qathome.com/pricing-api). 
 
 # Requirements
 
-* [Python 2.7] (http://askubuntu.com/questions/101591/how-do-i-install-python-2-7-2-on-ubuntu/101595) (releases after 2.7 have not been tested)
+* Python 2.7 (releases after 2.7 have not been tested)
 
 # Installation
 
-Install using `pip`...
+Clone this project and navigate to project folder. Install requirements.txt, for example using `pip`...
 
     pip install -r requirements.txt
 
 # Setup
 
 1. Create an account to 'manage your queue' on [QatHome] (http://www.qathome.com/accounts/signup/manager)
-2. Validate email and create your firm
-3. Create your application on http://qathome.com/developer/applications/
+2. Follow instructions to validate your email and create your firm, until you reach the help page in the queue manager interface
+3. Mark yourself as a developer by following the next steps
+4. Go to API interface http://www.qathome.com/api/v1/ 
+5. Login with your email and password
+6. Navigate users list http://www.qathome.com/api/v1/users/
+7. Find to your specific user link in the "ulr" field (example http://www.qathome.com/api/v1/users/8/)
+8. Go to your user link
+9. Mark the "developer" checkbox at the end of the page and click PUT
+8. Now you are a QatHome developer
+9. Create your application on http://qathome.com/developer/applications/ (link is not available for non-developer users)
+10. QatHome follows the django-allauth standards so feel free to choose what you need (Use for example "Client type" = "Public", "Authorization grant type" = "Client credentials", nothing into "redirect uris")
 4. Now edit the `static/src/config.js`:
 
     ```
