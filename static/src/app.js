@@ -228,7 +228,7 @@ angular.module('qathome')
 
                     var firmId = getIdFromUrl(ticket.firm.url);
                     $scope.pubblicoParams = { firmId: firmId };
-                    if($scope.ticket.state == 'E') {
+                    if($scope.ticket.state == 'E' || $scope.ticket.state == 'D') {
                         $cookies.remove('ticket-' + firmName, { path: '/' });
                     }
                 })
